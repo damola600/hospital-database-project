@@ -1,0 +1,111 @@
+<html>
+<head>
+<img src="logo.bmp" alt="logo">
+<script src="slideshow.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="hospital1.css">
+<title>Doctor Website</title>
+	<script>
+		window.addEventListener("load",function() {
+			getRows();
+		});
+		
+		function getRows() {
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.open("get","appointment.xml",true);
+			xmlhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					showResult(this);
+				}
+			};
+			xmlhttp.send(null);
+		}
+		
+		function showResult(xmlhttp) {
+			var xmlDoc = xmlhttp.responseXML.documentElement;
+			removeWhitespace(xmlDoc);
+			var outputResult = document.getElementById("BodyRows");
+			var rowData = xmlDoc.getElementsByTagName("row");
+			
+			addTableRowsFromXmlDoc(rowData,outputResult);
+		}
+		
+		function addTableRowsFromXmlDoc(xmlNodes,tableNode) {
+			var theTable = tableNode.parentNode;
+				var newRow, newCell, i;
+				console.log ("Number of nodes: " + xmlNodes.length);
+				for (i=0; i<xmlNodes.length; i++) {
+					newRow = tableNode.insertRow(i);
+					newRow.className = (i%2) ? "OddRow" : "EvenRow";
+					for (j=0; j<xmlNodes[i].childNodes.length; j++) {
+						newCell = newRow.insertCell(newRow.cells.length);
+						if (xmlNodes[i].childNodes[j].firstChild) {
+							newCell.innerHTML = xmlNodes[i].childNodes[j].firstChild.nodeValue;
+						} else {
+							newCell.innerHTML = "-";
+						}
+						console.log("cell: " + newCell);
+					}
+					}
+					theTable.appendChild(tableNode);
+		}
+		
+		function removeWhitespace(xml) {
+				var loopIndex;
+				for (loopIndex = 0; loopIndex < xml.childNodes.length; loopIndex++)
+				{
+					var currentNode = xml.childNodes[loopIndex];
+					if (currentNode.nodeType == 1)
+					{
+						removeWhitespace(currentNode);
+					}
+					if (!(/\S/.test(currentNode.nodeValue)) && (currentNode.nodeType == 3))
+					{
+						xml.removeChild(xml.childNodes[loopIndex--]);
+					}
+				}
+			}
+	</script>
+	<div class="topnav">
+		<a class="active" href="hospital1.html">Home</a>
+		<a class="active" href="department.html">Department</a>
+	</div>
+	<style>
+		.btn-group button{
+		text-align:center;
+		border:30px solid 
+		background-color:
+		float:left;
+
+		}
+		.btn-group button:not(:last-child){
+		border-right:10px solid;
+		}
+		.btn-group:after{
+		content:"";
+		clear:both;
+		display:table;
+		}
+		.btn-group button:hover{
+		box-shadow:0 12px 16pc 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+		}
+		
+		table {
+		}
+		td {
+			padding: 2px;
+			border: 1px solid #dadada;
+		}
+		.EvenRow {
+			background-color: yellow;
+		}
+
+	</style>
+</head>
+<body style="background-color:green">
+<img name="slide" width="100%" align="middle" height="500"><br><br>
+<table id="MainTable">
+	<tbody id="BodyRows"></tbody>
+</table>
+</body>
+</html>

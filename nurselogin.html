@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Nurse Log in Page </title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="hospital1.css">
+<link rel="stylesheet" href="nurse.css">
+<title> hospital website</title>
+<p style="background-color:white"><img src="logo.bmp" alt="logo"></p>
+<div class="topnav">
+<a class="active" href="hospital1.html">Home</a>
+<div class="search-container">
+<input type="text" placeholder="Search" name="search">
+<button type="submit"><i class="fa fa-search"></i></button>
+</div>
+</div>
+</head>
+<body>
+<div id="doctorlogin">
+<h2 align="center">LOG IN</h2>
+<form action="login.php" method="POST" align="center">
+<label>NurseID</label>
+<input id="nurseid" name="nurseid" type="text">
+<label>Password</label>
+<input id="pass" name="password" type="password"><br><br>
+<input name="nurse" type="submit" value="login">
+<span><?php echo $error; ?></span>
+</form>
+</div>
+
+</body>
+</html>

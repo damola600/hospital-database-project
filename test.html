@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table,th,td{
+border:1px solid black;
+border-collapse:collapse;
+}
+th,td{
+padding:5px;
+}
+
+</style>
+</head>
+<body>
+<table id="demo"></table>
+
+<script>
+function loadXMLDoc(){
+    var xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function(){
+	    if(this.readyState == 4 && this.status == 200){
+		  myFunction(this);
+		}
+	
+	};
+	xmlhttp.open("GET", "appointment.xml", true)'
+	xmlhttp.send();
+
+}
+function myFunction(xml){
+    var i;
+	var xmlDoc = xml.responseXML;
+	var table="<tr><th>Date</th><th>Patient Name</th><th>Start Time</th><th>End TIme</th></tr>";
+	var x=xmlDoc.getElementByTagName("row
+
+
+}
+</script>
+</body>
+</html>
